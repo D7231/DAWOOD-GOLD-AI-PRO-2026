@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAWOOD GOLD AI PRO</title>
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;background:#080d18;color:white;
+font-family:Tahoma,Arial;padding:15px
+}
+.container{max-width:500px;margin:auto}
+header{text-align:center;padding:20px}
+h1{color:#f5c542;font-size:25px}
+.subtitle{color:#9ba9bd}
+.card{
+background:#141e30;border:1px solid #293750;
+border-radius:14px;padding:18px;margin:15px 0
+}
+label{display:block;margin:12px 0 7px;color:#cbd5e1}
+input,select{
+width:100%;padding:13px;border-radius:9px;
+border:1px solid #35445c;background:#0b1424;
+color:white;font-size:17px
+}
+button{
+width:100%;padding:15px;border:0;
+border-radius:10px;font-size:17px;
+font-weight:bold;margin-top:12px;cursor:pointer
+}
+.analyze{background:#e5b936;color:#111}
+.buy{background:#087d50;color:white}
+.sell{background:#b52d3b;color:white}
+.result{display:none}
+.level{
+display:flex;justify-content:space-between;
+padding:12px;border-bottom:1px solid #293750
+}
+.green{color:#35df9b}
+.red{color:#ff6573}
+.yellow{color:#f5c542}
+footer{text-align:center;color:#78869b;font-size:12px;padding:20px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+<h1>DAWOOD GOLD AI</h1>
+<div class="subtitle">GOLD INTELLIGENCE PRO 2026</div>
+<p class="yellow">سیستم تحلیل و مدیریت معاملات طلا</p>
+</header>
+
+<div class="card">
+<h3>📊 پنل تحلیل XAUUSD</h3>
+
+<label>قیمت فعلی طلا</label>
+<input id="price" type="number" step="0.01" placeholder="مثلاً 4000">
+
+<label>تایم فریم</label>
+<select id="time">
+<option>5 دقیقه</option>
+<option>15 دقیقه</option>
+<option>30 دقیقه</option>
+<option>1 ساعت</option>
+</select>
+
+<label>جهت موردنظر</label>
+<select id="direction">
+<option value="BUY">BUY - خرید</option>
+<option value="SELL">SELL - فروش</option>
+</select>
+
+<label>فاصله حد ضرر (دلار)</label>
+<input id="risk" type="number" value="3" step="0.1">
+
+<button class="analyze" onclick="analyze()">تحلیل و محاسبه معاملات</button>
+</div>
+
+<div class="card result" id="result">
+<h3 class="yellow">نتیجه تحلیل داوود AI</h3>
+
+<div class="level">
+<span>سیگنال</span>
+<strong id="signal"></strong>
+</div>
+
+<div class="level">
+<span>نقطه ورود ENTRY</span>
+<strong id="entry"></strong>
+</div>
+
+<div class="level">
+<span>حد ضرر SL</span>
+<strong class="red" id="sl"></strong>
+</div>
+
+<div class="level">
+<span>هدف اول TP1</span>
+<strong class="green" id="tp1"></strong>
+</div>
+
+<div class="level">
+<span>هدف دوم TP2</span>
+<strong class="green" id="tp2"></strong>
+</div>
+
+<div class="level">
+<span>هدف سوم TP3</span>
+<strong class="green" id="tp3"></strong>
+</div>
+
+<p id="note" class="yellow"></p>
+</div>
+
+<div class="card">
+<h3>⚙️ امکانات سیستم</h3>
+<p>✅ تحلیل اختصاصی طلا</p>
+<p>✅ محاسبه Entry و Stop Loss</p>
+<p>✅ سه هدف سود</p>
+<p>✅ انتخاب تایم فریم</p>
+<p>🔄 اتصال به داده زنده: در حال توسعه</p>
+<p>🤖 معامله خودکار: در حال توسعه</p>
+</div>
+
+<footer>
+DAWOOD GOLD AI PRO 2026<br>
+نسخه آزمایشی - بدون اتصال به بازار
+</footer>
+
+</div>
+
+<script>
+function analyze(){
+let p=parseFloat(document.getElementById("price").value);
+let r=parseFloat(document.getElementById("risk").value);
+let d=document.getElementById("direction").value;
+
+if(!p || p<=0 || !r || r<=0){
+alert("قیمت و حد ضرر معتبر وارد کنید");
+return;
+}
+
+let sign=d==="BUY"?1:-1;
+
+document.getElementById("signal").innerText=d;
+document.getElementById("signal").className=
+d==="BUY"?"green":"red";
+
+document.getElementById("entry").innerText=p.toFixed(2);
+document.getElementById("sl").innerText=
+(p-sign*r).toFixed(2);
+
+document.getElementById("tp1").innerText=
+(p+sign*r).toFixed(2);
+
+document.getElementById("tp2").innerText=
+(p+sign*r*2).toFixed(2);
+
+document.getElementById("tp3").innerText=
+(p+sign*r*3).toFixed(2);
+
+document.getElementById("note").innerText=
+"تایم فریم انتخابی: "+document.getElementById("time").value+
+" | این محاسبه سیگنال تأییدشده بازار نیست.";
+
+document.getElementById("result").style.display="block";
+}
+</script>
+</body>
+</html>
